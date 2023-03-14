@@ -114,12 +114,12 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/posts/first-post/" class="link black dim">
-        Introduce myself
+      <a href="/posts/implementdeepcopy/" class="link black dim">
+        ImplementDeepCopy
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      Hey, I am zhangwei. I am a software engineer. Here will be my next place to record something.I will share my thoughts here, and most about technology.
+      var toString = Object.prototype.toString; function isArray(arg) { toString.call(arg) === &#34;[object array]&#34; } function forEach(obj, fn) { if (typeof obj !== &#39;object&#39;) { return; } if (typeof fn !== &#39;function&#39;) { return; } if (isArray(obj)) { for (var i, l = obj.length; i &lt; l; i++) { fn.call(null, obj[i], i) } } else { for (var key in obj) { if (obj.hasOwnProperty(key)) { fn.call(null, obj[key], key); } } } } function merge(/*obj1, obj2, obj3*/) { var result = {}; function assignValue(obj) { if (typeof result[key] === &#39;object&#39; &amp;&amp; obj ===&#34;object&#34; ){ merge(result[key], obj); } else if (typeof obj === &#39;object&#39;) { result[key] = merge({}, obj)	} else { result[key] = obj; } } for (var i = 0, l = arguments.
     </div>
   </div>
 </div>
@@ -131,12 +131,18 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/posts/go%E5%B9%B6%E5%8F%91%E4%B8%8B%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90/" class="link black dim">
-        Go多协程爬取阿里云资源
+      <a href="/posts/http-cors/" class="link black dim">
+        Http Cors
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下： package main import ( &#34;encoding/json&#34; &#34;fmt&#34; &#34;io/ioutil&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;strconv&#34; &#34;strings&#34; &#34;sync&#34; &#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34; ) var _ClassIds = []string{} const ( Endpoint string = &#34;http://oss-cn-beijing.aliyuncs.com&#34; AccessID string = &#34;这里存放阿里云accessId&#34; AccessKey string = &#34;这里存放阿里云accessKey&#34; RootPath string = &#34;classrecord/&#34; getLessonApi string = &#34;获取大班ID API&#34; getPaperApi string = &#34;获取大班ID试题API&#34; ) // todo 如果解析csv文件，这里创建一个struct 保存课程信息 // type CLassInfo struct { // Cid string // Cnum string // } type ClassInfo struct { Id int `json:&#34;id&#34;` LiveNumberId string `json:&#34;liveNumberId&#34;` } type Result struct { Result ClassInfo `json:&#34;result&#34;` } type Task struct { TaskId int64 `json:&#34;taskId&#34;` Stem string `json:&#34;stem&#34;` } type Paper struct { PaperId int64 `json:&#34;paperId&#34;` Tasks []Task `json:&#34;tasks&#34;` } //taskId&gt;stem Map type type TaskMap map[string]string func iterationClassIdWorker(id int, path chan string, bk *oss.
+      CORS定义
+CORS是W3C的一个标准，全称是：cross orgin resource sharing，中文翻译是：跨域资源共享；
+浏览器出于安全的原因，对跨域的请求会做特殊处理；
+跨域情况下，在浏览器接收到请求的数据时（此处需特别注意，跨域请求也是可以到达服务器的），浏览器会检查服务器的响应头里是否明确可以进行跨域资源共享，如果响应头里包含 Access-Control-Allow-Origin 则允许跨域请求数据，否者就是不允许跨域，浏览器检测无此字段，则认为不可跨域请求数据，就会报错，触发XmlHttpRequest的onerror事件。
+http预检请求
+http的预检请求也就是浏览器自行发送的option请求；
+当使用除get、post、head方法以外的其他方法发起http请求时浏览器会发送option请求； 请求头包含除一下字段的其他字段 Accept Accept-Language Content-Language Last-Event-ID Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain 浏览器通过发送option请求确认服务器是否允许访问（查看Access-Control-Allow-Origin字段的值），如果允许跨域则向服务器正式发送请求，否者就拒绝发送。
     </div>
   </div>
 </div>
@@ -148,12 +154,32 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/posts/quicksort/" class="link black dim">
-        Quicksort
+      <a href="/posts/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84/" class="link black dim">
+        Linux用户和组
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      golang实现快速排序 package main import ( &#34;fmt&#34; &#34;math/rand&#34; ) func QuickSort(slc []int) []int { middleIndex := len(slc) / 2 middleItem := slc[middleIndex] leftSlc := []int {} rightSlc := []int {} for i := 0; i &lt; len(slc); i++ { if i == middleIndex { continue } if slc[i] &lt;= middleItem { leftSlc = append(leftSlc, slc[i]) }else { rightSlc = append(rightSlc, slc[i]) } } return append(append(QuickSort(leftSlc), middleItem), QuickSort(rightSlc)...) } func main() { slc := []int {} for i := 0; i &lt; 10; i++ { slc = append(slc, rand.
+      新建系统组mariadb，新建系统用户mariadb 例子1： 要求其没有家目录,且shell为/sbin/nologin;创建组用groupadd命令； 创建系统组：groupadd -r groupName
+groupadd [options] group
+创建用户用useradd命令；
+useradd [options] LOGIN
+创建系统用户：useradd -r userName
+不创建家目录需要用到-M选项
+为用户指定shell用-s选项
+为用户指定组用-g选项
+所以该题的答案为：
+先创建系统组mariadb，groupadd -r mariadb 创建系统用户，useradd -r mariadb -s /sbin/nologin -M -g mariadb 例子2：新建GID为5000的组mageedu，新建用户gentoo，要求其家目录为/users/gentoo，密码同用户名 为组制定groupid用-g选项；
+为用户设置密码用-p选项；
+所以答案为：
+groupadd -g 5000 mageedu useradd -s /users/gentoo gentoo -p gentoo 例子3：新建用户fedora，其家目录为/users/fedora，密码同用户名 答案为：useradd fedora -s /users/fedora
+例子4：新建用户www，其家目录为/users/www；删除用户www，但保留其家目录 删除用户用userdel；
+如果要同时删除用户家目录则用-f选项；
+答案为：
+useradd www -s /users/www userdel www 例子5：为用户gentoo和fedora新增附加组mageedu 更改用户信息用usermod命令；
+usermod [options] LOGIN；
+指定附加组用-G选项；
+-G, &ndash;groups GROUP1[,GROUP2,&hellip;[,GROUPN]]]
+答案为：
     </div>
   </div>
 </div>
@@ -162,17 +188,17 @@
       
     </section>
     <ul class="pagination pagination-default">
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
-      </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
-      </li>
-      <li class="page-item active">
-        <a aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
+      <li class="page-item">
+        <a href="/posts/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/posts/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+        <a href="/posts/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
       </li>
       <li class="page-item">
         <a href="/posts/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
@@ -184,7 +210,7 @@
         <a href="/posts/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
       </li>
       <li class="page-item">
-        <a href="/posts/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+        <a href="/posts/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
         <a href="/posts/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>

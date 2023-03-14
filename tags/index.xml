@@ -5,6 +5,61 @@
     <link>https://gohugo-theme-ananke.pages.dev/tags/</link>
     <description>Recent content in Tags on Welcome to Way&#39;s home page.</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://gohugo-theme-ananke.pages.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Nov 2019 17:18:11 +0800</lastBuildDate><atom:link href="https://gohugo-theme-ananke.pages.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go</title>
+      <link>https://gohugo-theme-ananke.pages.dev/tags/go/</link>
+      <pubDate>Thu, 28 Nov 2019 17:18:11 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javascript</title>
+      <link>https://gohugo-theme-ananke.pages.dev/tags/javascript/</link>
+      <pubDate>Fri, 27 Sep 2019 14:57:25 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>http</title>
+      <link>https://gohugo-theme-ananke.pages.dev/tags/http/</link>
+      <pubDate>Mon, 23 Sep 2019 17:30:57 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/tags/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://gohugo-theme-ananke.pages.dev/tags/linux/</link>
+      <pubDate>Sun, 08 Sep 2019 10:11:49 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>https://gohugo-theme-ananke.pages.dev/tags/mysql/</link>
+      <pubDate>Fri, 23 Aug 2019 11:47:07 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>css</title>
+      <link>https://gohugo-theme-ananke.pages.dev/tags/css/</link>
+      <pubDate>Fri, 16 Aug 2019 09:36:58 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/tags/css/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

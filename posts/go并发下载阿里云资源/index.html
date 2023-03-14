@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Go多协程爬取阿里云资源 | Welcome to Way&#39;s home page.</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下： package main import ( &#34;encoding/json&#34; &#34;fmt&#34; &#34;io/ioutil&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;strconv&#34; &#34;strings&#34; &#34;sync&#34; &#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34; ) var _ClassIds = []string{} const ( Endpoint string = &#34;http://oss-cn-beijing.aliyuncs.com&#34; AccessID string = &#34;这里存放阿里云accessId&#34; AccessKey string = &#34;这里存放阿里云accessKey&#34; RootPath string = &#34;classrecord/&#34; getLessonApi string = &#34;获取大班ID API&#34; getPaperApi string = &#34;获取大班ID试题API&#34; ) // todo 如果解析csv文件，这里创建一个struct 保存课程信息 // type CLassInfo struct { // Cid string // Cnum string // } type ClassInfo struct { Id int `json:&#34;id&#34;` LiveNumberId string `json:&#34;liveNumberId&#34;` } type Result struct { Result ClassInfo `json:&#34;result&#34;` } type Task struct { TaskId int64 `json:&#34;taskId&#34;` Stem string `json:&#34;stem&#34;` } type Paper struct { PaperId int64 `json:&#34;paperId&#34;` Tasks []Task `json:&#34;tasks&#34;` } //taskId&gt;stem Map type type TaskMap map[string]string func iterationClassIdWorker(id int, path chan string, bk *oss.">
+    <meta name="generator" content="Hugo 0.110.0">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Go多协程爬取阿里云资源" />
+<meta property="og:description" content="用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下： package main import ( &#34;encoding/json&#34; &#34;fmt&#34; &#34;io/ioutil&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;strconv&#34; &#34;strings&#34; &#34;sync&#34; &#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34; ) var _ClassIds = []string{} const ( Endpoint string = &#34;http://oss-cn-beijing.aliyuncs.com&#34; AccessID string = &#34;这里存放阿里云accessId&#34; AccessKey string = &#34;这里存放阿里云accessKey&#34; RootPath string = &#34;classrecord/&#34; getLessonApi string = &#34;获取大班ID API&#34; getPaperApi string = &#34;获取大班ID试题API&#34; ) // todo 如果解析csv文件，这里创建一个struct 保存课程信息 // type CLassInfo struct { // Cid string // Cnum string // } type ClassInfo struct { Id int `json:&#34;id&#34;` LiveNumberId string `json:&#34;liveNumberId&#34;` } type Result struct { Result ClassInfo `json:&#34;result&#34;` } type Task struct { TaskId int64 `json:&#34;taskId&#34;` Stem string `json:&#34;stem&#34;` } type Paper struct { PaperId int64 `json:&#34;paperId&#34;` Tasks []Task `json:&#34;tasks&#34;` } //taskId&gt;stem Map type type TaskMap map[string]string func iterationClassIdWorker(id int, path chan string, bk *oss." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gohugo-theme-ananke.pages.dev/posts/go%E5%B9%B6%E5%8F%91%E4%B8%8B%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-11-28T17:18:11+08:00" />
+<meta property="article:modified_time" content="2019-11-28T17:18:11+08:00" /><meta property="og:site_name" content="Welcome to Way&#39;s home page." />
+<meta itemprop="name" content="Go多协程爬取阿里云资源">
+<meta itemprop="description" content="用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下： package main import ( &#34;encoding/json&#34; &#34;fmt&#34; &#34;io/ioutil&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;strconv&#34; &#34;strings&#34; &#34;sync&#34; &#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34; ) var _ClassIds = []string{} const ( Endpoint string = &#34;http://oss-cn-beijing.aliyuncs.com&#34; AccessID string = &#34;这里存放阿里云accessId&#34; AccessKey string = &#34;这里存放阿里云accessKey&#34; RootPath string = &#34;classrecord/&#34; getLessonApi string = &#34;获取大班ID API&#34; getPaperApi string = &#34;获取大班ID试题API&#34; ) // todo 如果解析csv文件，这里创建一个struct 保存课程信息 // type CLassInfo struct { // Cid string // Cnum string // } type ClassInfo struct { Id int `json:&#34;id&#34;` LiveNumberId string `json:&#34;liveNumberId&#34;` } type Result struct { Result ClassInfo `json:&#34;result&#34;` } type Task struct { TaskId int64 `json:&#34;taskId&#34;` Stem string `json:&#34;stem&#34;` } type Paper struct { PaperId int64 `json:&#34;paperId&#34;` Tasks []Task `json:&#34;tasks&#34;` } //taskId&gt;stem Map type type TaskMap map[string]string func iterationClassIdWorker(id int, path chan string, bk *oss."><meta itemprop="datePublished" content="2019-11-28T17:18:11+08:00" />
+<meta itemprop="dateModified" content="2019-11-28T17:18:11+08:00" />
+<meta itemprop="wordCount" content="694">
+<meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go多协程爬取阿里云资源"/>
+<meta name="twitter:description" content="用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下： package main import ( &#34;encoding/json&#34; &#34;fmt&#34; &#34;io/ioutil&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;strconv&#34; &#34;strings&#34; &#34;sync&#34; &#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34; ) var _ClassIds = []string{} const ( Endpoint string = &#34;http://oss-cn-beijing.aliyuncs.com&#34; AccessID string = &#34;这里存放阿里云accessId&#34; AccessKey string = &#34;这里存放阿里云accessKey&#34; RootPath string = &#34;classrecord/&#34; getLessonApi string = &#34;获取大班ID API&#34; getPaperApi string = &#34;获取大班ID试题API&#34; ) // todo 如果解析csv文件，这里创建一个struct 保存课程信息 // type CLassInfo struct { // Cid string // Cnum string // } type ClassInfo struct { Id int `json:&#34;id&#34;` LiveNumberId string `json:&#34;liveNumberId&#34;` } type Result struct { Result ClassInfo `json:&#34;result&#34;` } type Task struct { TaskId int64 `json:&#34;taskId&#34;` Stem string `json:&#34;stem&#34;` } type Paper struct { PaperId int64 `json:&#34;paperId&#34;` Tasks []Task `json:&#34;tasks&#34;` } //taskId&gt;stem Map type type TaskMap map[string]string func iterationClassIdWorker(id int, path chan string, bk *oss."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Welcome to Way&#39;s home page.
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">
+              Posts
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/GoHugoIO" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+      
+      <a href="https://twitter.com/share?url=https://gohugo-theme-ananke.pages.dev/posts/go%E5%B9%B6%E5%8F%91%E4%B8%8B%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90/&amp;text=Go%e5%a4%9a%e5%8d%8f%e7%a8%8b%e7%88%ac%e5%8f%96%e9%98%bf%e9%87%8c%e4%ba%91%e8%b5%84%e6%ba%90" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Go多协程爬取阿里云资源</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2019-11-28T17:18:11+08:00">November 28, 2019</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="用go写了个爬取好未来存放在阿里云oss的音频附件代码如下">用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;encoding/json&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;io/ioutil&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;strconv&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;strings&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;sync&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">_ClassIds</span> = []<span style="color:#66d9ef">string</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Endpoint</span>     <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;http://oss-cn-beijing.aliyuncs.com&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">AccessID</span>     <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;这里存放阿里云accessId&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">AccessKey</span>    <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;这里存放阿里云accessKey&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">RootPath</span>     <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;classrecord/&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">getLessonApi</span> <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;获取大班ID API&#34;</span> 
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">getPaperApi</span>  <span style="color:#66d9ef">string</span> = <span style="color:#e6db74">&#34;获取大班ID试题API&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// todo 如果解析csv文件，这里创建一个struct 保存课程信息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// type CLassInfo struct {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 	Cid  string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 	Cnum string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ClassInfo</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Id</span>           <span style="color:#66d9ef">int</span>    <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">LiveNumberId</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;liveNumberId&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Result</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Result</span> <span style="color:#a6e22e">ClassInfo</span> <span style="color:#e6db74">`json:&#34;result&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Task</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">TaskId</span> <span style="color:#66d9ef">int64</span>  <span style="color:#e6db74">`json:&#34;taskId&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Stem</span>   <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;stem&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Paper</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">PaperId</span> <span style="color:#66d9ef">int64</span>  <span style="color:#e6db74">`json:&#34;paperId&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Tasks</span>   []<span style="color:#a6e22e">Task</span> <span style="color:#e6db74">`json:&#34;tasks&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//taskId&gt;stem Map type
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TaskMap</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">iterationClassIdWorker</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">path</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">bk</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">oss</span>.<span style="color:#a6e22e">Bucket</span>, <span style="color:#a6e22e">wg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">path</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">count</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">init</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// todo 这里先通过小班id 转换大班id，封装方法，返回大班id、error哈，如果error就不用跑后面了，等处理下个班，别忘了wg.Done()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#75715e">// todo 这里通过大班id、课次号、获取题目列表， 封装2个方法哈，在一级方法里合并语音题、分角色朗读两次请求的结果，在二级方法里请求具体题目列表，返回 map[string]string, error
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//小班id
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">cId</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">p</span>, <span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//课次号
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">cNum</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">p</span>, <span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">taskMap</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getTaskMap</span>(<span style="color:#a6e22e">cId</span>, <span style="color:#a6e22e">cNum</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Get taskMap error: &#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;workerid:&#34;</span>, <span style="color:#a6e22e">id</span>, <span style="color:#e6db74">&#34;开始下载班级音频，班级id:&#34;</span>, <span style="color:#a6e22e">p</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">marker</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">oss</span>.<span style="color:#a6e22e">Marker</span>(<span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">lret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bk</span>.<span style="color:#a6e22e">ListObjects</span>(<span style="color:#a6e22e">oss</span>.<span style="color:#a6e22e">Prefix</span>(<span style="color:#a6e22e">p</span>), <span style="color:#a6e22e">marker</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;client.Bucket, path:&#34;</span>, <span style="color:#a6e22e">p</span>, <span style="color:#e6db74">&#34;error :&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">obj</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">lret</span>.<span style="color:#a6e22e">Objects</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">count</span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">suffix</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">Key</span>[len(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">Key</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>:]
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">suffix</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.wav&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">suffix</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.mp3&#34;</span> {
+</span></span><span style="display:flex;"><span>					<span style="color:#a6e22e">tms</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">Key</span>, <span style="color:#e6db74">&#34;/&#34;</span>)
+</span></span><span style="display:flex;"><span>					<span style="color:#a6e22e">fn</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tms</span>[<span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">init</span> {
+</span></span><span style="display:flex;"><span>						<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Mkdir</span>(<span style="color:#e6db74">&#34;./wavFile/&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">tms</span>[<span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">0777</span>)
+</span></span><span style="display:flex;"><span>						<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>							<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;create dir error:&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>						}
+</span></span><span style="display:flex;"><span>						<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Chmod</span>(<span style="color:#e6db74">&#34;./wavFile/&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">tms</span>[<span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">0777</span>)
+</span></span><span style="display:flex;"><span>						<span style="color:#a6e22e">init</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>					}
+</span></span><span style="display:flex;"><span>					<span style="color:#75715e">// todo 这里再解析下目标文件名，匹配下题目题干，并且修改文件名，封装方法哈，输入文件名和题目列表，返回文件名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>					<span style="color:#75715e">//fn包含taskid，替换taskid为stem
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>					<span style="color:#a6e22e">fnSlc</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">fn</span>, <span style="color:#e6db74">&#34;-&#34;</span>)
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">fnSlc</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">6</span> {
+</span></span><span style="display:flex;"><span>						<span style="color:#75715e">//查找taskMap
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>						<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">taskMap</span>[<span style="color:#a6e22e">fnSlc</span>[<span style="color:#ae81ff">3</span>]]; <span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>							<span style="color:#a6e22e">fn</span> = <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Replace</span>(<span style="color:#a6e22e">fn</span>, <span style="color:#a6e22e">fnSlc</span>[<span style="color:#ae81ff">3</span>], <span style="color:#a6e22e">taskMap</span>[<span style="color:#a6e22e">fnSlc</span>[<span style="color:#ae81ff">3</span>]], <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>						}
+</span></span><span style="display:flex;"><span>					}
+</span></span><span style="display:flex;"><span>					<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bk</span>.<span style="color:#a6e22e">GetObjectToFile</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">Key</span>, <span style="color:#e6db74">&#34;./wavFile/&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">tms</span>[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">fn</span>)
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>						<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;download error, file:&#34;</span>, <span style="color:#a6e22e">fn</span>, <span style="color:#e6db74">&#34;error :&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>					}
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">marker</span> = <span style="color:#a6e22e">oss</span>.<span style="color:#a6e22e">Marker</span>(<span style="color:#a6e22e">lret</span>.<span style="color:#a6e22e">NextMarker</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">lret</span>.<span style="color:#a6e22e">IsTruncated</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;workerid:&#34;</span>, <span style="color:#a6e22e">id</span>, <span style="color:#e6db74">&#34;下载班级音频完成，班级id:&#34;</span>, <span style="color:#a6e22e">p</span>, <span style="color:#e6db74">&#34;,获取完成&#34;</span>)
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// todo 注意下上面各个资源的声明周期，该清空要清空
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;workerid:&#34;</span>, <span style="color:#a6e22e">id</span>, <span style="color:#e6db74">&#34;下载班级音频完成，班级id:&#34;</span>, <span style="color:#a6e22e">p</span>, <span style="color:#e6db74">&#34;,下载文件数量:&#34;</span>, <span style="color:#a6e22e">count</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Done</span>()
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//转换paper tasks到map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getTaskMap</span>(<span style="color:#a6e22e">cid</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">cNum</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">TaskMap</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">papers</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getPaerListByLnum</span>(<span style="color:#a6e22e">cid</span>, <span style="color:#a6e22e">cNum</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">taskMap</span> <span style="color:#f92672">:=</span> make(<span style="color:#a6e22e">TaskMap</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">paper</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">papers</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">task</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">paper</span>.<span style="color:#a6e22e">Tasks</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">taskMap</span>[<span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">FormatInt</span>(int64(<span style="color:#a6e22e">task</span>.<span style="color:#a6e22e">TaskId</span>), <span style="color:#ae81ff">10</span>)] = <span style="color:#a6e22e">task</span>.<span style="color:#a6e22e">Stem</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">taskMap</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//根据小班ID获取大班ID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getLnumByCid</span>(<span style="color:#a6e22e">cid</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// fmt.Printf(&#34;classId: %v&#34;, cid)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">resp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">getLessonApi</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">cid</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">mResult</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Result</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">s</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">mResult</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">mResult</span>.<span style="color:#a6e22e">Result</span>.<span style="color:#a6e22e">LiveNumberId</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//根据大班ID获取paperList
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getPaerListByLnum</span>(<span style="color:#a6e22e">cid</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">cNum</span> <span style="color:#66d9ef">string</span>) ([]<span style="color:#a6e22e">Paper</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// fmt.Printf(&#34;classId: %v&#34;, cid)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">//?liveNum=0101-M3hx6cEnePdHkjvgNzkvDz&amp;classNum=9&amp;type=10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">//根据小班ID获取大班ID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">lnum</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getLnumByCid</span>(<span style="color:#a6e22e">cid</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//包含”语音“和”朗读“
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">papers</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span>[]<span style="color:#a6e22e">Paper</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">papersChn</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> []<span style="color:#a6e22e">Paper</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//语音题worker
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">getPaperListByLnumAndCnum</span>(<span style="color:#a6e22e">lnum</span>, <span style="color:#a6e22e">cNum</span>, <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">papersChn</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">wg</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//分角色朗读worker
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">getPaperListByLnumAndCnum</span>(<span style="color:#a6e22e">lnum</span>, <span style="color:#a6e22e">cNum</span>, <span style="color:#ae81ff">10</span>, <span style="color:#a6e22e">papersChn</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">wg</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//等待worker执行完毕
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Wait</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//关闭channel
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	close(<span style="color:#a6e22e">papersChn</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//range papers channel 获取数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">ps</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">papersChn</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//合并papers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#f92672">*</span><span style="color:#a6e22e">papers</span> = append(<span style="color:#f92672">*</span><span style="color:#a6e22e">papers</span>, <span style="color:#a6e22e">ps</span><span style="color:#f92672">...</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">papers</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//根据大班ID和课次号获取paperList
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getPaperListByLnumAndCnum</span>(<span style="color:#a6e22e">lnum</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">cNum</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">typ</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">papersChn</span> <span style="color:#66d9ef">chan</span> []<span style="color:#a6e22e">Paper</span>, <span style="color:#a6e22e">wg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>) ([]<span style="color:#a6e22e">Paper</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//获取 语音题  2 分角色朗读  10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">queryData</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;?liveNum=%s&amp;classNum=%s&amp;type=%d&#34;</span>, <span style="color:#a6e22e">lnum</span>, <span style="color:#a6e22e">cNum</span>, <span style="color:#a6e22e">typ</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">resp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">getPaperApi</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">queryData</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">voicePapers</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span>[]<span style="color:#a6e22e">Paper</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">s</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">voicePapers</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">papersChn</span> <span style="color:#f92672">&lt;-</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">voicePapers</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//获取完毕执行Done
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Done</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">voicePapers</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">client</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">oss</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">Endpoint</span>, <span style="color:#a6e22e">AccessID</span>, <span style="color:#a6e22e">AccessKey</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalln</span>(<span style="color:#e6db74">&#34;aliyun oss init error, error :&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">bk</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Bucket</span>(<span style="color:#e6db74">&#34;ss-dtc&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;client.Bucket, path:&#34;</span>, <span style="color:#a6e22e">RootPath</span><span style="color:#f92672">+</span><span style="color:#a6e22e">_ClassIds</span>[<span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#34;error :&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Mkdir</span>(<span style="color:#e6db74">&#34;./wavFile&#34;</span>, <span style="color:#ae81ff">0x777</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Chmod</span>(<span style="color:#e6db74">&#34;./wavFile&#34;</span>, <span style="color:#ae81ff">0777</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">iterationClassIdWorker</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">pch</span>, <span style="color:#a6e22e">bk</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">wg</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">count</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">cid</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">_ClassIds</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;启动课程下载数量：&#34;</span>, <span style="color:#a6e22e">count</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">count</span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// todo 这里需要修改为使用 classInfo对象传递
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">pch</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">RootPath</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">cid</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Wait</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="需求说明">需求说明</h3>
+<ul>
+<li>下载所有给定小班和课次下的音频文件</li>
+<li>通过小班ID获取大班ID</li>
+<li>通过大班ID和课次号获取所有试题</li>
+<li>替换下载的音频文件名为题干名（原文件名包含的有题干ID）</li>
+</ul>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/go/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">go</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/quicksort/">Quicksort</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/go-defer/">Go Defer</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/go-function-closure/">Go Function Closure</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/go-pointer-receiver/">Go Pointer Receiver</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://gohugo-theme-ananke.pages.dev/" >
+    &copy;  Welcome to Way's home page. 2023 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/GoHugoIO" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Linux用户和组 | Welcome to Way&#39;s home page.</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="新建系统组mariadb，新建系统用户mariadb 例子1： 要求其没有家目录,且shell为/sbin/nologin;创建组用groupadd命令； 创建系统组：groupadd -r groupName
+groupadd [options] group
+创建用户用useradd命令；
+useradd [options] LOGIN
+创建系统用户：useradd -r userName
+不创建家目录需要用到-M选项
+为用户指定shell用-s选项
+为用户指定组用-g选项
+所以该题的答案为：
+先创建系统组mariadb，groupadd -r mariadb 创建系统用户，useradd -r mariadb -s /sbin/nologin -M -g mariadb 例子2：新建GID为5000的组mageedu，新建用户gentoo，要求其家目录为/users/gentoo，密码同用户名 为组制定groupid用-g选项；
+为用户设置密码用-p选项；
+所以答案为：
+groupadd -g 5000 mageedu useradd -s /users/gentoo gentoo -p gentoo 例子3：新建用户fedora，其家目录为/users/fedora，密码同用户名 答案为：useradd fedora -s /users/fedora
+例子4：新建用户www，其家目录为/users/www；删除用户www，但保留其家目录 删除用户用userdel；
+如果要同时删除用户家目录则用-f选项；
+答案为：
+useradd www -s /users/www userdel www 例子5：为用户gentoo和fedora新增附加组mageedu 更改用户信息用usermod命令；
+usermod [options] LOGIN；
+指定附加组用-G选项；
+-G, &ndash;groups GROUP1[,GROUP2,&hellip;[,GROUPN]]]
+答案为：">
+    <meta name="generator" content="Hugo 0.110.0">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Linux用户和组" />
+<meta property="og:description" content="新建系统组mariadb，新建系统用户mariadb 例子1： 要求其没有家目录,且shell为/sbin/nologin;创建组用groupadd命令； 创建系统组：groupadd -r groupName
+groupadd [options] group
+创建用户用useradd命令；
+useradd [options] LOGIN
+创建系统用户：useradd -r userName
+不创建家目录需要用到-M选项
+为用户指定shell用-s选项
+为用户指定组用-g选项
+所以该题的答案为：
+先创建系统组mariadb，groupadd -r mariadb 创建系统用户，useradd -r mariadb -s /sbin/nologin -M -g mariadb 例子2：新建GID为5000的组mageedu，新建用户gentoo，要求其家目录为/users/gentoo，密码同用户名 为组制定groupid用-g选项；
+为用户设置密码用-p选项；
+所以答案为：
+groupadd -g 5000 mageedu useradd -s /users/gentoo gentoo -p gentoo 例子3：新建用户fedora，其家目录为/users/fedora，密码同用户名 答案为：useradd fedora -s /users/fedora
+例子4：新建用户www，其家目录为/users/www；删除用户www，但保留其家目录 删除用户用userdel；
+如果要同时删除用户家目录则用-f选项；
+答案为：
+useradd www -s /users/www userdel www 例子5：为用户gentoo和fedora新增附加组mageedu 更改用户信息用usermod命令；
+usermod [options] LOGIN；
+指定附加组用-G选项；
+-G, &ndash;groups GROUP1[,GROUP2,&hellip;[,GROUPN]]]
+答案为：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gohugo-theme-ananke.pages.dev/posts/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-09-08T10:11:49+08:00" />
+<meta property="article:modified_time" content="2019-09-08T10:11:49+08:00" /><meta property="og:site_name" content="Welcome to Way&#39;s home page." />
+<meta itemprop="name" content="Linux用户和组">
+<meta itemprop="description" content="新建系统组mariadb，新建系统用户mariadb 例子1： 要求其没有家目录,且shell为/sbin/nologin;创建组用groupadd命令； 创建系统组：groupadd -r groupName
+groupadd [options] group
+创建用户用useradd命令；
+useradd [options] LOGIN
+创建系统用户：useradd -r userName
+不创建家目录需要用到-M选项
+为用户指定shell用-s选项
+为用户指定组用-g选项
+所以该题的答案为：
+先创建系统组mariadb，groupadd -r mariadb 创建系统用户，useradd -r mariadb -s /sbin/nologin -M -g mariadb 例子2：新建GID为5000的组mageedu，新建用户gentoo，要求其家目录为/users/gentoo，密码同用户名 为组制定groupid用-g选项；
+为用户设置密码用-p选项；
+所以答案为：
+groupadd -g 5000 mageedu useradd -s /users/gentoo gentoo -p gentoo 例子3：新建用户fedora，其家目录为/users/fedora，密码同用户名 答案为：useradd fedora -s /users/fedora
+例子4：新建用户www，其家目录为/users/www；删除用户www，但保留其家目录 删除用户用userdel；
+如果要同时删除用户家目录则用-f选项；
+答案为：
+useradd www -s /users/www userdel www 例子5：为用户gentoo和fedora新增附加组mageedu 更改用户信息用usermod命令；
+usermod [options] LOGIN；
+指定附加组用-G选项；
+-G, &ndash;groups GROUP1[,GROUP2,&hellip;[,GROUPN]]]
+答案为："><meta itemprop="datePublished" content="2019-09-08T10:11:49+08:00" />
+<meta itemprop="dateModified" content="2019-09-08T10:11:49+08:00" />
+<meta itemprop="wordCount" content="119">
+<meta itemprop="keywords" content="linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux用户和组"/>
+<meta name="twitter:description" content="新建系统组mariadb，新建系统用户mariadb 例子1： 要求其没有家目录,且shell为/sbin/nologin;创建组用groupadd命令； 创建系统组：groupadd -r groupName
+groupadd [options] group
+创建用户用useradd命令；
+useradd [options] LOGIN
+创建系统用户：useradd -r userName
+不创建家目录需要用到-M选项
+为用户指定shell用-s选项
+为用户指定组用-g选项
+所以该题的答案为：
+先创建系统组mariadb，groupadd -r mariadb 创建系统用户，useradd -r mariadb -s /sbin/nologin -M -g mariadb 例子2：新建GID为5000的组mageedu，新建用户gentoo，要求其家目录为/users/gentoo，密码同用户名 为组制定groupid用-g选项；
+为用户设置密码用-p选项；
+所以答案为：
+groupadd -g 5000 mageedu useradd -s /users/gentoo gentoo -p gentoo 例子3：新建用户fedora，其家目录为/users/fedora，密码同用户名 答案为：useradd fedora -s /users/fedora
+例子4：新建用户www，其家目录为/users/www；删除用户www，但保留其家目录 删除用户用userdel；
+如果要同时删除用户家目录则用-f选项；
+答案为：
+useradd www -s /users/www userdel www 例子5：为用户gentoo和fedora新增附加组mageedu 更改用户信息用usermod命令；
+usermod [options] LOGIN；
+指定附加组用-G选项；
+-G, &ndash;groups GROUP1[,GROUP2,&hellip;[,GROUPN]]]
+答案为："/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Welcome to Way&#39;s home page.
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">
+              Posts
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/GoHugoIO" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+      
+      <a href="https://twitter.com/share?url=https://gohugo-theme-ananke.pages.dev/posts/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84/&amp;text=Linux%e7%94%a8%e6%88%b7%e5%92%8c%e7%bb%84" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Linux用户和组</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2019-09-08T10:11:49+08:00">September 8, 2019</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h3 id="新建系统组mariadb新建系统用户mariadb">新建系统组mariadb，新建系统用户mariadb</h3>
+<h3 id="例子1-要求其没有家目录且shell为sbinnologin创建组用groupadd命令">例子1： 要求其没有家目录,且shell为/sbin/nologin;创建组用groupadd命令；</h3>
+<p>创建系统组：groupadd -r groupName</p>
+<p>groupadd [options] group</p>
+<p>创建用户用useradd命令；</p>
+<p>useradd [options] LOGIN</p>
+<p>创建系统用户：useradd -r userName</p>
+<p>不创建家目录需要用到-M选项</p>
+<p>为用户指定shell用-s选项</p>
+<p>为用户指定组用-g选项</p>
+<p>所以该题的答案为：</p>
+<ul>
+<li>先创建系统组mariadb，groupadd -r mariadb</li>
+<li>创建系统用户，useradd -r mariadb -s /sbin/nologin -M -g mariadb</li>
+</ul>
+<h3 id="例子2新建gid为5000的组mageedu新建用户gentoo要求其家目录为usersgentoo密码同用户名">例子2：新建GID为5000的组mageedu，新建用户gentoo，要求其家目录为/users/gentoo，密码同用户名</h3>
+<p>为组制定groupid用-g选项；</p>
+<p>为用户设置密码用-p选项；</p>
+<p>所以答案为：</p>
+<ul>
+<li>groupadd -g 5000 mageedu</li>
+<li>useradd -s /users/gentoo gentoo -p gentoo</li>
+</ul>
+<h3 id="例子3新建用户fedora其家目录为usersfedora密码同用户名">例子3：新建用户fedora，其家目录为/users/fedora，密码同用户名</h3>
+<p>答案为：useradd fedora -s /users/fedora</p>
+<h3 id="例子4新建用户www其家目录为userswww删除用户www但保留其家目录">例子4：新建用户www，其家目录为/users/www；删除用户www，但保留其家目录</h3>
+<p>删除用户用userdel；</p>
+<p>如果要同时删除用户家目录则用-f选项；</p>
+<p>答案为：</p>
+<ul>
+<li>useradd www -s /users/www</li>
+<li>userdel www</li>
+</ul>
+<h3 id="例子5为用户gentoo和fedora新增附加组mageedu">例子5：为用户gentoo和fedora新增附加组mageedu</h3>
+<p>更改用户信息用usermod命令；</p>
+<p>usermod [options] LOGIN；</p>
+<p>指定附加组用-G选项；</p>
+<p>-G, &ndash;groups GROUP1[,GROUP2,&hellip;[,GROUPN]]]</p>
+<p>答案为：</p>
+<ul>
+<li>usermod -G mageedu gentoo</li>
+<li>usermod -G mageedu fedora</li>
+</ul>
+<h3 id="例子6复制目录varlog至tmp目录修改tmplog及其内部的所有文件的属组为mageedu并让属组对目录本身拥有写权限">例子6：复制目录/var/log至/tmp/目录，修改/tmp/log及其内部的所有文件的属组为mageedu，并让属组对目录本身拥有写权限；</h3>
+<p>复制文件用cp命令；</p>
+<p>cp [OPTION]&hellip; [-T] SOURCE DEST
+cp [OPTION]&hellip; SOURCE&hellip; DIRECTORY
+cp [OPTION]&hellip; -t DIRECTORY SOURCE&hellip;</p>
+<p>修改文件权限用chmod命令；</p>
+<p>chmod [OPTION]&hellip; MODE[,MODE]&hellip; FILE&hellip;
+chmod [OPTION]&hellip; OCTAL-MODE FILE&hellip;
+chmod [OPTION]&hellip; &ndash;reference=RFILE FILE&hellip;</p>
+<p>修改目录下所有文件用-R选项；</p>
+<p>答案为：</p>
+<ul>
+<li>cp -r /var/log /tmp</li>
+<li>chmod -g mageedu</li>
+<li>chmod -r g+w</li>
+</ul>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/linux/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">linux</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://gohugo-theme-ananke.pages.dev/" >
+    &copy;  Welcome to Way's home page. 2023 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/GoHugoIO" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

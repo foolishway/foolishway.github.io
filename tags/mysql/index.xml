@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on Welcome to Way&#39;s home page.</title>
+    <link>https://gohugo-theme-ananke.pages.dev/tags/mysql/</link>
+    <description>Recent content in mysql on Welcome to Way&#39;s home page.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Aug 2019 11:47:07 +0800</lastBuildDate><atom:link href="https://gohugo-theme-ananke.pages.dev/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql Install</title>
+      <link>https://gohugo-theme-ananke.pages.dev/posts/mysql-install/</link>
+      <pubDate>Fri, 23 Aug 2019 11:47:07 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/posts/mysql-install/</guid>
+      <description>mac下安装mysql brew 安装方式 brew install mysql 等待安装完毕
+启动mysql服务 brew services start mysql
+命令行下登录mysql mysql -u root root账号默认没设置密码
+设置root账号密码 UPDATE mysql.user SET Password=PASSWORD(&amp;lsquo;MyNewPass&amp;rsquo;) WHERE User=&amp;lsquo;root&amp;rsquo;; FLUSH PRIVILEGES; 密码要求特殊字符、大小写英文字符、数字； 密码不合格会报syntax error</description>
+    </item>
+    
+  </channel>
+</rss>

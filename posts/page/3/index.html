@@ -29,18 +29,18 @@
 
     
     
-      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Welcome to Way&#39;s home page." />
-      <link href="/index.xml" rel="feed" type="application/rss+xml" title="Welcome to Way&#39;s home page." />
+      <link href="/posts/index.xml" rel="alternate" type="application/rss+xml" title="Welcome to Way&#39;s home page." />
+      <link href="/posts/index.xml" rel="feed" type="application/rss+xml" title="Welcome to Way&#39;s home page." />
       
     
     
-    <meta property="og:title" content="Welcome to Way&#39;s home page." />
+    <meta property="og:title" content="Posts" />
 <meta property="og:description" content="The last theme you&#39;ll ever need. Maybe." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://gohugo-theme-ananke.pages.dev/" /><meta property="og:site_name" content="Welcome to Way&#39;s home page." />
-<meta itemprop="name" content="Welcome to Way&#39;s home page.">
+<meta property="og:url" content="https://gohugo-theme-ananke.pages.dev/posts/" /><meta property="og:site_name" content="Welcome to Way&#39;s home page." />
+<meta itemprop="name" content="Posts">
 <meta itemprop="description" content="The last theme you&#39;ll ever need. Maybe."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Welcome to Way&#39;s home page."/>
+<meta name="twitter:title" content="Posts"/>
 <meta name="twitter:description" content="The last theme you&#39;ll ever need. Maybe."/>
 
 	
@@ -61,15 +61,6 @@
     </a>
     <div class="flex-l items-center">
       
-<h4></h4>
-<ul class="pl0 mr3">
-    
-    <li class="list f5 f4-ns fw4 dib pr3">
-        <a class="hover-white no-underline white-90" href="/fr/">fr</a>
-    </li>
-    
-</ul>
-
 
       
         <ul class="pl0 mr3">
@@ -104,7 +95,7 @@
 
       <div class="tc-l pv3 ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          Welcome to Way&#39;s home page.
+          Posts
         </h1>
         
       </div>
@@ -114,145 +105,110 @@
 
     <main class="pb7" role="main">
       
- <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray">
-    
-  </article>
-  
-  
-  
-  
-  
-  
-  
-    
-    
-
-    <div class="pa3 pa4-ns w-100 w-70-ns center">
+  <article class="pa3 pa4-ns nested-copy-line-height">
+    <section class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></section>
+    <section class="flex-ns flex-wrap justify-around mt5">
       
-       
-          <h1 class="flex-none">
-            Recent Posts
-          </h1>
-        
-
-      
-
-      <section class="w-100 mw8">
-        
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/first-post/" class="color-inherit dim link">
-            Introduce myself
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          Hey, I am zhangwei. I am a software engineer. Here will be my next place to record something.I will share my thoughts here, and most about technology.
-        </div>
-          <a href="/posts/first-post/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/go-defer/" class="link black dim">
+        Go Defer
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      defer 作用 go语言中有defer关键字；
+其作用类似于js中的finally，用于清除函数所占系统资源；
+defer 用法 defer用在一个函数的函数体内; defer关键词后跟一个函数调用，后面所跟的函数调用和普通的函数调用没有区别；
+如果defer函数有返回值，则函数执行完毕之后返回值会被丢弃。
+defer 关键字执行函数的时机：
+外部函数执行return语句时 函数执行结束 goroutine报错（panick） 如果外部函数有return表达式，defer函数会在return表达式设置值之后，return之前执行； 比如：
+// f returns 42 func f() (result int) { defer func() { // result is accessed after it was set to 6 by the return statement result *= 7 }() return 6 } defer函数可以访问外部函数的变量；
+如果有多个defer表达式，执行顺序为从最后一个到第一个；
+lock(l) defer unlock(l) // unlocking happens before surrounding function returns // prints 3 2 1 0 before surrounding function returns for i := 0; i &lt;= 3; i++ { defer fmt.
     </div>
   </div>
-</article>
+</div>
 
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/go%E5%B9%B6%E5%8F%91%E4%B8%8B%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90/" class="color-inherit dim link">
-            Go多协程爬取阿里云资源
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下： package main import ( &#34;encoding/json&#34; &#34;fmt&#34; &#34;io/ioutil&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;strconv&#34; &#34;strings&#34; &#34;sync&#34; &#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34; ) var _ClassIds = []string{} const ( Endpoint string = &#34;http://oss-cn-beijing.aliyuncs.com&#34; AccessID string = &#34;这里存放阿里云accessId&#34; AccessKey string = &#34;这里存放阿里云accessKey&#34; RootPath string = &#34;classrecord/&#34; getLessonApi string = &#34;获取大班ID API&#34; getPaperApi string = &#34;获取大班ID试题API&#34; ) // todo 如果解析csv文件，这里创建一个struct 保存课程信息 // type CLassInfo struct { // Cid string // Cnum string // } type ClassInfo struct { Id int `json:&#34;id&#34;` LiveNumberId string `json:&#34;liveNumberId&#34;` } type Result struct { Result ClassInfo `json:&#34;result&#34;` } type Task struct { TaskId int64 `json:&#34;taskId&#34;` Stem string `json:&#34;stem&#34;` } type Paper struct { PaperId int64 `json:&#34;paperId&#34;` Tasks []Task `json:&#34;tasks&#34;` } //taskId&gt;stem Map type type TaskMap map[string]string func iterationClassIdWorker(id int, path chan string, bk *oss.
         </div>
-          <a href="/posts/go%E5%B9%B6%E5%8F%91%E4%B8%8B%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/go-function-closure/" class="link black dim">
+        Go Function Closure
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      go语言中的closure（闭包） go语言和JavaScript都支持closure（闭包）；
+匿名函数被常用来实现闭包，go语言中也支持匿名函数；
+closure的定义是：一个函数可以访问其函数体外的变量，我们称这个函数为closure（闭包）；
+如下：
+package main import &#34;fmt&#34; // fibonacci is a function that returns // a function that returns an int. func fibonacci() func(int) int { a := 0 b := 0 return func(x int) int { if x == 0 { return 0 } if x == 1 { b = 1 return 1 } s := a + b a = b b = s return s } } func main() { f := fibonacci() for i := 0; i &lt; 10; i++ { fmt.
     </div>
   </div>
-</article>
+</div>
 
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/quicksort/" class="color-inherit dim link">
-            Quicksort
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          golang实现快速排序 package main import ( &#34;fmt&#34; &#34;math/rand&#34; ) func QuickSort(slc []int) []int { middleIndex := len(slc) / 2 middleItem := slc[middleIndex] leftSlc := []int {} rightSlc := []int {} for i := 0; i &lt; len(slc); i++ { if i == middleIndex { continue } if slc[i] &lt;= middleItem { leftSlc = append(leftSlc, slc[i]) }else { rightSlc = append(rightSlc, slc[i]) } } return append(append(QuickSort(leftSlc), middleItem), QuickSort(rightSlc)...) } func main() { slc := []int {} for i := 0; i &lt; 10; i++ { slc = append(slc, rand.
         </div>
-          <a href="/posts/quicksort/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/go-pointer-receiver/" class="link black dim">
+        Go Pointer Receiver
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      golang struct类型 go语言中没有class概念，但有一个struct类型，可以实现class。 struct中可以包含基础类型做为其属性，比如boolean、string、int、float等， 实例化可通过v :=T{}，其中，打括号中是struct的属性值，类似面向对象语言中实例化一个class所用的new。
+golang pointer类型 go语言中，如果一个变量存储的是另一个变量所在的地址，则这个变量的类型为pointer类型，也就是指针；
+比如：
+var house = &#34;I am a string!&#34; padr := &amp;house 变量padr就是一个pointer类型的变量，其存储的是字符串house的地址； 打印出来，就类似“0xc000084030”， 打印类型，则为“*string” 在golang中，指针类型就是“*T”
+golang methods with pointer receiver go语言中的方法可以被指针类型所接收，该值可以为pointe类型，通过这种关系，可以把struct和该方法关联；
+这种隐式的给struct指定方法的方式可以引用一句名言：if it looks like a duck, work like a duck and quacks like a duck it must be a duck.
+比如：
+package main import ( &#34;fmt&#34; &#34;math&#34; ) type Vertex struct { X, Y float64 } func (v Vertex) Abs() float64 { return math.
     </div>
   </div>
-</article>
+</div>
 
-          </div>
-        
-      </section>
-
+        </div>
       
-      <section class="w-100">
-        <h1 class="f3">More</h1>
-        
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/implementdeepcopy/" class="link black dim">
-              ImplementDeepCopy
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/http-cors/" class="link black dim">
-              Http Cors
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84/" class="link black dim">
-              Linux用户和组
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/go-defer/" class="link black dim">
-              Go Defer
-            </a>
-          </h2>
-        
-
-        
-        
-          <a href="/posts/" class="link db f6 pa2 br3 bg-mid-gray white dim w4 tc">All Posts</a>
-        
-        </section>
-      
-
-      </div>
-  
+    </section>
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/posts/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/2/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/4/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul></article>
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">

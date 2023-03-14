@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Welcome to Way&#39;s home page.</title>
+    <title>linux | Welcome to Way&#39;s home page.</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="The last theme you&#39;ll ever need. Maybe.">
     <meta name="generator" content="Hugo 0.110.0">
@@ -29,18 +29,18 @@
 
     
     
-      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Welcome to Way&#39;s home page." />
-      <link href="/index.xml" rel="feed" type="application/rss+xml" title="Welcome to Way&#39;s home page." />
+      <link href="/tags/linux/index.xml" rel="alternate" type="application/rss+xml" title="Welcome to Way&#39;s home page." />
+      <link href="/tags/linux/index.xml" rel="feed" type="application/rss+xml" title="Welcome to Way&#39;s home page." />
       
     
     
-    <meta property="og:title" content="Welcome to Way&#39;s home page." />
+    <meta property="og:title" content="linux" />
 <meta property="og:description" content="The last theme you&#39;ll ever need. Maybe." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://gohugo-theme-ananke.pages.dev/" /><meta property="og:site_name" content="Welcome to Way&#39;s home page." />
-<meta itemprop="name" content="Welcome to Way&#39;s home page.">
+<meta property="og:url" content="https://gohugo-theme-ananke.pages.dev/tags/linux/" /><meta property="og:site_name" content="Welcome to Way&#39;s home page." />
+<meta itemprop="name" content="linux">
 <meta itemprop="description" content="The last theme you&#39;ll ever need. Maybe."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Welcome to Way&#39;s home page."/>
+<meta name="twitter:title" content="linux"/>
 <meta name="twitter:description" content="The last theme you&#39;ll ever need. Maybe."/>
 
 	
@@ -61,15 +61,6 @@
     </a>
     <div class="flex-l items-center">
       
-<h4></h4>
-<ul class="pl0 mr3">
-    
-    <li class="list f5 f4-ns fw4 dib pr3">
-        <a class="hover-white no-underline white-90" href="/fr/">fr</a>
-    </li>
-    
-</ul>
-
 
       
         <ul class="pl0 mr3">
@@ -104,7 +95,7 @@
 
       <div class="tc-l pv3 ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          Welcome to Way&#39;s home page.
+          linux
         </h1>
         
       </div>
@@ -114,145 +105,53 @@
 
     <main class="pb7" role="main">
       
- <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray">
-    
+  <article class="cf pa3 pa4-m pa4-l">
+    <div class="measure-wide-l center f4 lh-copy nested-copy-line-height nested-links mid-gray">
+      <p>Below you will find pages that utilize the taxonomy term “linux”</p>
+    </div>
   </article>
-  
-  
-  
-  
-  
-  
-  
-    
-    
-
-    <div class="pa3 pa4-ns w-100 w-70-ns center">
+  <div class="mw8 center">
+    <section class="flex-ns flex-wrap justify-around mt5">
       
-       
-          <h1 class="flex-none">
-            Recent Posts
-          </h1>
-        
-
-      
-
-      <section class="w-100 mw8">
-        
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/first-post/" class="color-inherit dim link">
-            Introduce myself
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          Hey, I am zhangwei. I am a software engineer. Here will be my next place to record something.I will share my thoughts here, and most about technology.
-        </div>
-          <a href="/posts/first-post/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
+        <div class="relative w-100  mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84/" class="link black dim">
+        Linux用户和组
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      新建系统组mariadb，新建系统用户mariadb 例子1： 要求其没有家目录,且shell为/sbin/nologin;创建组用groupadd命令； 创建系统组：groupadd -r groupName
+groupadd [options] group
+创建用户用useradd命令；
+useradd [options] LOGIN
+创建系统用户：useradd -r userName
+不创建家目录需要用到-M选项
+为用户指定shell用-s选项
+为用户指定组用-g选项
+所以该题的答案为：
+先创建系统组mariadb，groupadd -r mariadb 创建系统用户，useradd -r mariadb -s /sbin/nologin -M -g mariadb 例子2：新建GID为5000的组mageedu，新建用户gentoo，要求其家目录为/users/gentoo，密码同用户名 为组制定groupid用-g选项；
+为用户设置密码用-p选项；
+所以答案为：
+groupadd -g 5000 mageedu useradd -s /users/gentoo gentoo -p gentoo 例子3：新建用户fedora，其家目录为/users/fedora，密码同用户名 答案为：useradd fedora -s /users/fedora
+例子4：新建用户www，其家目录为/users/www；删除用户www，但保留其家目录 删除用户用userdel；
+如果要同时删除用户家目录则用-f选项；
+答案为：
+useradd www -s /users/www userdel www 例子5：为用户gentoo和fedora新增附加组mageedu 更改用户信息用usermod命令；
+usermod [options] LOGIN；
+指定附加组用-G选项；
+-G, &ndash;groups GROUP1[,GROUP2,&hellip;[,GROUPN]]]
+答案为：
     </div>
   </div>
-</article>
+</div>
 
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/go%E5%B9%B6%E5%8F%91%E4%B8%8B%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90/" class="color-inherit dim link">
-            Go多协程爬取阿里云资源
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下： package main import ( &#34;encoding/json&#34; &#34;fmt&#34; &#34;io/ioutil&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;strconv&#34; &#34;strings&#34; &#34;sync&#34; &#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34; ) var _ClassIds = []string{} const ( Endpoint string = &#34;http://oss-cn-beijing.aliyuncs.com&#34; AccessID string = &#34;这里存放阿里云accessId&#34; AccessKey string = &#34;这里存放阿里云accessKey&#34; RootPath string = &#34;classrecord/&#34; getLessonApi string = &#34;获取大班ID API&#34; getPaperApi string = &#34;获取大班ID试题API&#34; ) // todo 如果解析csv文件，这里创建一个struct 保存课程信息 // type CLassInfo struct { // Cid string // Cnum string // } type ClassInfo struct { Id int `json:&#34;id&#34;` LiveNumberId string `json:&#34;liveNumberId&#34;` } type Result struct { Result ClassInfo `json:&#34;result&#34;` } type Task struct { TaskId int64 `json:&#34;taskId&#34;` Stem string `json:&#34;stem&#34;` } type Paper struct { PaperId int64 `json:&#34;paperId&#34;` Tasks []Task `json:&#34;tasks&#34;` } //taskId&gt;stem Map type type TaskMap map[string]string func iterationClassIdWorker(id int, path chan string, bk *oss.
         </div>
-          <a href="/posts/go%E5%B9%B6%E5%8F%91%E4%B8%8B%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
+      
+    </section>
   </div>
-</article>
-
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/quicksort/" class="color-inherit dim link">
-            Quicksort
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          golang实现快速排序 package main import ( &#34;fmt&#34; &#34;math/rand&#34; ) func QuickSort(slc []int) []int { middleIndex := len(slc) / 2 middleItem := slc[middleIndex] leftSlc := []int {} rightSlc := []int {} for i := 0; i &lt; len(slc); i++ { if i == middleIndex { continue } if slc[i] &lt;= middleItem { leftSlc = append(leftSlc, slc[i]) }else { rightSlc = append(rightSlc, slc[i]) } } return append(append(QuickSort(leftSlc), middleItem), QuickSort(rightSlc)...) } func main() { slc := []int {} for i := 0; i &lt; 10; i++ { slc = append(slc, rand.
-        </div>
-          <a href="/posts/quicksort/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
-      </section>
-
-      
-      <section class="w-100">
-        <h1 class="f3">More</h1>
-        
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/implementdeepcopy/" class="link black dim">
-              ImplementDeepCopy
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/http-cors/" class="link black dim">
-              Http Cors
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84/" class="link black dim">
-              Linux用户和组
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/go-defer/" class="link black dim">
-              Go Defer
-            </a>
-          </h2>
-        
-
-        
-        
-          <a href="/posts/" class="link db f6 pa2 br3 bg-mid-gray white dim w4 tc">All Posts</a>
-        
-        </section>
-      
-
-      </div>
-  
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">

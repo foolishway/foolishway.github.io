@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>css on Welcome to Way&#39;s home page.</title>
+    <link>https://gohugo-theme-ananke.pages.dev/tags/css/</link>
+    <description>Recent content in css on Welcome to Way&#39;s home page.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Aug 2019 09:36:58 +0800</lastBuildDate><atom:link href="https://gohugo-theme-ananke.pages.dev/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Css Inline</title>
+      <link>https://gohugo-theme-ananke.pages.dev/posts/css-inline/</link>
+      <pubDate>Fri, 16 Aug 2019 09:36:58 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/posts/css-inline/</guid>
+      <description>有个同事问我，说为啥我用span标签写了一个序列，内容换行怎么围绕着这个span标签了？？ 我说，这正是css行内元素的特性啊！ 如果不想被“围绕”，可以使用block元素，通过float或者是flex等都可以实现。 css需要去感悟，理解，而不仅仅是死记硬背。
+如下： &amp;lt;html&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#39;div1&amp;#39;&amp;gt; &amp;lt;span id=&amp;#39;span1&amp;#39;&amp;gt;1&amp;lt;/span&amp;gt; &amp;lt;span id=&amp;#39;span2&amp;#39;&amp;gt;内容内容内容内容内容内容内容内容内容内容&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;style type=&amp;#39;text/css&amp;#39;&amp;gt; #div1{ width:100px; height:100px; background:red; } #span1{ background:black; color:#fff; padding:1px 5px; } #span2{ word-break:break-all; } &amp;lt;/style&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 效果： </description>
+    </item>
+    
+  </channel>
+</rss>

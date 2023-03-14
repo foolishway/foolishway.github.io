@@ -27,6 +27,116 @@
                 href="https://gohugo-theme-ananke.pages.dev/"
                 />
   </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/tags/go/</loc>
+    <lastmod>2019-11-28T17:18:11+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/go%E5%B9%B6%E5%8F%91%E4%B8%8B%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90/</loc>
+    <lastmod>2019-11-28T17:18:11+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/tags/</loc>
+    <lastmod>2019-11-28T17:18:11+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://gohugo-theme-ananke.pages.dev/fr/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://gohugo-theme-ananke.pages.dev/tags/"
+                />
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/quicksort/</loc>
+    <lastmod>2019-10-09T15:06:26+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/implementdeepcopy/</loc>
+    <lastmod>2019-09-27T14:57:25+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/tags/javascript/</loc>
+    <lastmod>2019-09-27T14:57:25+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/tags/http/</loc>
+    <lastmod>2019-09-23T17:30:57+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/http-cors/</loc>
+    <lastmod>2019-09-23T17:30:57+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/tags/linux/</loc>
+    <lastmod>2019-09-08T10:11:49+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84/</loc>
+    <lastmod>2019-09-08T10:11:49+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/go-defer/</loc>
+    <lastmod>2019-09-04T09:41:06+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/go-function-closure/</loc>
+    <lastmod>2019-08-27T13:42:13+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/go-pointer-receiver/</loc>
+    <lastmod>2019-08-26T14:13:02+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/tags/mysql/</loc>
+    <lastmod>2019-08-23T11:47:07+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/mysql-install/</loc>
+    <lastmod>2019-08-23T11:47:07+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/tags/css/</loc>
+    <lastmod>2019-08-16T09:36:58+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/css-inline/</loc>
+    <lastmod>2019-08-16T09:36:58+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/new-operator/</loc>
+    <lastmod>2018-02-16T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/js-formater/</loc>
+    <lastmod>2014-04-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/snake/</loc>
+    <lastmod>2013-03-25T09:51:02+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>https://gohugo-theme-ananke.pages.dev/categories/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -39,20 +149,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://gohugo-theme-ananke.pages.dev/categories/"
-                />
-  </url><url>
-    <loc>https://gohugo-theme-ananke.pages.dev/tags/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://gohugo-theme-ananke.pages.dev/fr/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gohugo-theme-ananke.pages.dev/tags/"
                 />
   </url>
 </urlset>

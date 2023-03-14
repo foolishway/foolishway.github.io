@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javascript on Welcome to Way&#39;s home page.</title>
+    <link>https://gohugo-theme-ananke.pages.dev/tags/javascript/</link>
+    <description>Recent content in javascript on Welcome to Way&#39;s home page.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 Sep 2019 14:57:25 +0800</lastBuildDate><atom:link href="https://gohugo-theme-ananke.pages.dev/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ImplementDeepCopy</title>
+      <link>https://gohugo-theme-ananke.pages.dev/posts/implementdeepcopy/</link>
+      <pubDate>Fri, 27 Sep 2019 14:57:25 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/posts/implementdeepcopy/</guid>
+      <description>var toString = Object.prototype.toString; function isArray(arg) { toString.call(arg) === &amp;#34;[object array]&amp;#34; } function forEach(obj, fn) { if (typeof obj !== &amp;#39;object&amp;#39;) { return; } if (typeof fn !== &amp;#39;function&amp;#39;) { return; } if (isArray(obj)) { for (var i, l = obj.length; i &amp;lt; l; i++) { fn.call(null, obj[i], i) } } else { for (var key in obj) { if (obj.hasOwnProperty(key)) { fn.call(null, obj[key], key); } } } } function merge(/*obj1, obj2, obj3*/) { var result = {}; function assignValue(obj) { if (typeof result[key] === &amp;#39;object&amp;#39; &amp;amp;&amp;amp; obj ===&amp;#34;object&amp;#34; ){ merge(result[key], obj); } else if (typeof obj === &amp;#39;object&amp;#39;) { result[key] = merge({}, obj)	} else { result[key] = obj; } } for (var i = 0, l = arguments.</description>
+    </item>
+    
+    <item>
+      <title>javascript 中 调用new操作符时候发生了什么？</title>
+      <link>https://gohugo-theme-ananke.pages.dev/posts/new-operator/</link>
+      <pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/posts/new-operator/</guid>
+      <description> 第一步，创建一个空对象 第二步，空对象的__proto__指向constractor的prototype 第三步，用该空对象为this调用constractor ES6中Reflect.constructor函数和test.js中createClass实现同样功能 function createClass(constructor,args){ var o = {}; o.__proto__ = constructor.prototype; constructor.call(o,...args); return o; } function Animal(type,cando){ this.type = type; this.cando = cando; } Animal.prototype.showType = function () { console.log(&amp;#39;I am a &amp;#39; + this.type + &amp;#34;,and I can &amp;#34; + this.cando); } var cat = createClass(Animal,[&amp;#34;cat&amp;#34;,&amp;#34;捉老鼠&amp;#34;]); cat.showType(); </description>
+    </item>
+    
+    <item>
+      <title>javascript string formater</title>
+      <link>https://gohugo-theme-ananke.pages.dev/posts/js-formater/</link>
+      <pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/posts/js-formater/</guid>
+      <description>函数实现 function format(string) { var args = arguments; var pattern = new RegExp(&amp;#34;%([1-&amp;#34; + arguments.length + &amp;#34;])&amp;#34;, &amp;#34;g&amp;#34;); return String(string).replace(pattern, function (match, index) { return args[index]; }); }; 用法 console.log(format(&amp;#34;And the %1 want to know whose %2 you %3&amp;#34;, &amp;#34;papers&amp;#34;, &amp;#34;shirt&amp;#34;, &amp;#34;wear&amp;#34;)); </description>
+    </item>
+    
+    <item>
+      <title>贪吃蛇小游戏</title>
+      <link>https://gohugo-theme-ananke.pages.dev/posts/snake/</link>
+      <pubDate>Mon, 25 Mar 2013 09:51:02 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/posts/snake/</guid>
+      <description>贪吃蛇小游戏 &amp;lt;!DOCTYPE html PUBLIC &amp;#34;-//W3C//DTD XHTML 1.0 Transitional//EN&amp;#34; &amp;#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&amp;#34;&amp;gt; &amp;lt;html xmlns=&amp;#34;http://www.w3.org/1999/xhtml&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;贪吃蛇 作者:记忆中的马肠河&amp;lt;/title&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; window.onload = function () { var snake = { //移动方向 fangxiang: &amp;#34;left&amp;#34;, //蛇身 snakeBody: [], box: document.getElementById(&amp;#34;snakeBox&amp;#34;), //移动 move: function () { var timer = &amp;#34;&amp;#34;; //判断是否GameOver var isFailed = function () { //判断蛇头是否碰到蛇身 var isHeadRunIntoBody=function(){ var t=false; for(var i=0;i&amp;lt;snake.snakeBody.length-1;i++){ if(snake.snakeBody[snake.snakeBody.length-1].x==snake.snakeBody[i].x&amp;amp;&amp;amp; snake.snakeBody[snake.snakeBody.length-1].y==snake.snakeBody[i].y ){ t=true; break; } } return t; } //判断条件：是否蛇身碰到蛇头、是否蛇头碰到墙壁 if ( isHeadRunIntoBody()|| snake.</description>
+    </item>
+    
+  </channel>
+</rss>
