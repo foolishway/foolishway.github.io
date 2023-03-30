@@ -114,6 +114,23 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/new-operator/" class="link black dim">
+        javascript 中 调用new操作符时候发生了什么？
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       第一步，创建一个空对象 第二步，空对象的__proto__指向constractor的prototype 第三步，用该空对象为this调用constractor ES6中Reflect.constructor函数和test.js中createClass实现同样功能 function createClass(constructor,args){ var o = {}; o.__proto__ = constructor.prototype; constructor.call(o,...args); return o; } function Animal(type,cando){ this.type = type; this.cando = cando; } Animal.prototype.showType = function () { console.log(&#39;I am a &#39; + this.type + &#34;,and I can &#34; + this.cando); } var cat = createClass(Animal,[&#34;cat&#34;,&#34;捉老鼠&#34;]); cat.showType(); 
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/js-formater/" class="link black dim">
         javascript string formater
       </a>

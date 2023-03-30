@@ -114,6 +114,43 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84/" class="link black dim">
+        Linux用户和组
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      新建系统组mariadb，新建系统用户mariadb 例子1： 要求其没有家目录,且shell为/sbin/nologin;创建组用groupadd命令； 创建系统组：groupadd -r groupName
+groupadd [options] group
+创建用户用useradd命令；
+useradd [options] LOGIN
+创建系统用户：useradd -r userName
+不创建家目录需要用到-M选项
+为用户指定shell用-s选项
+为用户指定组用-g选项
+所以该题的答案为：
+先创建系统组mariadb，groupadd -r mariadb 创建系统用户，useradd -r mariadb -s /sbin/nologin -M -g mariadb 例子2：新建GID为5000的组mageedu，新建用户gentoo，要求其家目录为/users/gentoo，密码同用户名 为组制定groupid用-g选项；
+为用户设置密码用-p选项；
+所以答案为：
+groupadd -g 5000 mageedu useradd -s /users/gentoo gentoo -p gentoo 例子3：新建用户fedora，其家目录为/users/fedora，密码同用户名 答案为：useradd fedora -s /users/fedora
+例子4：新建用户www，其家目录为/users/www；删除用户www，但保留其家目录 删除用户用userdel；
+如果要同时删除用户家目录则用-f选项；
+答案为：
+useradd www -s /users/www userdel www 例子5：为用户gentoo和fedora新增附加组mageedu 更改用户信息用usermod命令；
+usermod [options] LOGIN；
+指定附加组用-G选项；
+-G, &ndash;groups GROUP1[,GROUP2,&hellip;[,GROUPN]]]
+答案为：
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/go-defer/" class="link black dim">
         Go Defer
       </a>
@@ -149,30 +186,6 @@ lock(l) defer unlock(l) // unlocking happens before surrounding function returns
 closure的定义是：一个函数可以访问其函数体外的变量，我们称这个函数为closure（闭包）；
 如下：
 package main import &#34;fmt&#34; // fibonacci is a function that returns // a function that returns an int. func fibonacci() func(int) int { a := 0 b := 0 return func(x int) int { if x == 0 { return 0 } if x == 1 { b = 1 return 1 } s := a + b a = b b = s return s } } func main() { f := fibonacci() for i := 0; i &lt; 10; i++ { fmt.
-    </div>
-  </div>
-</div>
-
-        </div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white">
-          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/posts/go-pointer-receiver/" class="link black dim">
-        Go Pointer Receiver
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      golang struct类型 go语言中没有class概念，但有一个struct类型，可以实现class。 struct中可以包含基础类型做为其属性，比如boolean、string、int、float等， 实例化可通过v :=T{}，其中，打括号中是struct的属性值，类似面向对象语言中实例化一个class所用的new。
-golang pointer类型 go语言中，如果一个变量存储的是另一个变量所在的地址，则这个变量的类型为pointer类型，也就是指针；
-比如：
-var house = &#34;I am a string!&#34; padr := &amp;house 变量padr就是一个pointer类型的变量，其存储的是字符串house的地址； 打印出来，就类似“0xc000084030”， 打印类型，则为“*string” 在golang中，指针类型就是“*T”
-golang methods with pointer receiver go语言中的方法可以被指针类型所接收，该值可以为pointe类型，通过这种关系，可以把struct和该方法关联；
-这种隐式的给struct指定方法的方式可以引用一句名言：if it looks like a duck, work like a duck and quacks like a duck it must be a duck.
-比如：
-package main import ( &#34;fmt&#34; &#34;math&#34; ) type Vertex struct { X, Y float64 } func (v Vertex) Abs() float64 { return math.
     </div>
   </div>
 </div>

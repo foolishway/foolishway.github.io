@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Welcome to Way&#39;s home page.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Mar 2023 13:05:01 +0800</lastBuildDate><atom:link href="https://gohugo-theme-ananke.pages.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Mar 2023 09:50:16 +0800</lastBuildDate><atom:link href="https://gohugo-theme-ananke.pages.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HttpOrigin</title>
+      <link>https://gohugo-theme-ananke.pages.dev/posts/httporigin/</link>
+      <pubDate>Wed, 29 Mar 2023 09:50:16 +0800</pubDate>
+      
+      <guid>https://gohugo-theme-ananke.pages.dev/posts/httporigin/</guid>
+      <description>Talk about HTTP Origin feild. As the wiki says: The Origin request header indicates the origin (scheme, hostname, and port) that caused the request. For example, if a user agent needs to request resources included in a page, or fetched by scripts that it executes, then the origin of the page may be included in the request.
+According wiki&amp;rsquo;s definition, someone will confuse that what the differents between origin and referer?</description>
+    </item>
+    
     <item>
       <title>Introduce myself</title>
       <link>https://gohugo-theme-ananke.pages.dev/posts/first-post/</link>

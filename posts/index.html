@@ -114,6 +114,24 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/httporigin/" class="link black dim">
+        HttpOrigin
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      Talk about HTTP Origin feild. As the wiki says: The Origin request header indicates the origin (scheme, hostname, and port) that caused the request. For example, if a user agent needs to request resources included in a page, or fetched by scripts that it executes, then the origin of the page may be included in the request.
+According wiki&rsquo;s definition, someone will confuse that what the differents between origin and referer?
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/first-post/" class="link black dim">
         Introduce myself
       </a>
@@ -137,23 +155,6 @@
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       用go写了个爬取好未来存放在阿里云oss的音频附件，代码如下： package main import ( &#34;encoding/json&#34; &#34;fmt&#34; &#34;io/ioutil&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;strconv&#34; &#34;strings&#34; &#34;sync&#34; &#34;github.com/aliyun/aliyun-oss-go-sdk/oss&#34; ) var _ClassIds = []string{} const ( Endpoint string = &#34;http://oss-cn-beijing.aliyuncs.com&#34; AccessID string = &#34;这里存放阿里云accessId&#34; AccessKey string = &#34;这里存放阿里云accessKey&#34; RootPath string = &#34;classrecord/&#34; getLessonApi string = &#34;获取大班ID API&#34; getPaperApi string = &#34;获取大班ID试题API&#34; ) // todo 如果解析csv文件，这里创建一个struct 保存课程信息 // type CLassInfo struct { // Cid string // Cnum string // } type ClassInfo struct { Id int `json:&#34;id&#34;` LiveNumberId string `json:&#34;liveNumberId&#34;` } type Result struct { Result ClassInfo `json:&#34;result&#34;` } type Task struct { TaskId int64 `json:&#34;taskId&#34;` Stem string `json:&#34;stem&#34;` } type Paper struct { PaperId int64 `json:&#34;paperId&#34;` Tasks []Task `json:&#34;tasks&#34;` } //taskId&gt;stem Map type type TaskMap map[string]string func iterationClassIdWorker(id int, path chan string, bk *oss.
-    </div>
-  </div>
-</div>
-
-        </div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white">
-          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/posts/quicksort/" class="link black dim">
-        Quicksort
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      golang实现快速排序 package main import ( &#34;fmt&#34; &#34;math/rand&#34; ) func QuickSort(slc []int) []int { middleIndex := len(slc) / 2 middleItem := slc[middleIndex] leftSlc := []int {} rightSlc := []int {} for i := 0; i &lt; len(slc); i++ { if i == middleIndex { continue } if slc[i] &lt;= middleItem { leftSlc = append(leftSlc, slc[i]) }else { rightSlc = append(rightSlc, slc[i]) } } return append(append(QuickSort(leftSlc), middleItem), QuickSort(rightSlc)...) } func main() { slc := []int {} for i := 0; i &lt; 10; i++ { slc = append(slc, rand.
     </div>
   </div>
 </div>

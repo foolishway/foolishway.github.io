@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://gohugo-theme-ananke.pages.dev/posts/first-post/</loc>
-    <lastmod>2023-03-13T13:05:01+08:00</lastmod>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/httporigin/</loc>
+    <lastmod>2023-03-29T09:50:16+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://gohugo-theme-ananke.pages.dev/posts/</loc>
-    <lastmod>2023-03-13T13:05:01+08:00</lastmod>
+    <lastmod>2023-03-29T09:50:16+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://gohugo-theme-ananke.pages.dev/</loc>
-    <lastmod>2023-03-13T13:05:01+08:00</lastmod>
+    <lastmod>2023-03-29T09:50:16+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -26,6 +26,11 @@
                 hreflang="en"
                 href="https://gohugo-theme-ananke.pages.dev/"
                 />
+  </url><url>
+    <loc>https://gohugo-theme-ananke.pages.dev/posts/first-post/</loc>
+    <lastmod>2023-03-13T13:05:01+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://gohugo-theme-ananke.pages.dev/tags/go/</loc>
     <lastmod>2019-11-28T17:18:11+08:00</lastmod>

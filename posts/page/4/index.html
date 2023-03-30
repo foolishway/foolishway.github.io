@@ -114,6 +114,30 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/go-pointer-receiver/" class="link black dim">
+        Go Pointer Receiver
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      golang struct类型 go语言中没有class概念，但有一个struct类型，可以实现class。 struct中可以包含基础类型做为其属性，比如boolean、string、int、float等， 实例化可通过v :=T{}，其中，打括号中是struct的属性值，类似面向对象语言中实例化一个class所用的new。
+golang pointer类型 go语言中，如果一个变量存储的是另一个变量所在的地址，则这个变量的类型为pointer类型，也就是指针；
+比如：
+var house = &#34;I am a string!&#34; padr := &amp;house 变量padr就是一个pointer类型的变量，其存储的是字符串house的地址； 打印出来，就类似“0xc000084030”， 打印类型，则为“*string” 在golang中，指针类型就是“*T”
+golang methods with pointer receiver go语言中的方法可以被指针类型所接收，该值可以为pointe类型，通过这种关系，可以把struct和该方法关联；
+这种隐式的给struct指定方法的方式可以引用一句名言：if it looks like a duck, work like a duck and quacks like a duck it must be a duck.
+比如：
+package main import ( &#34;fmt&#34; &#34;math&#34; ) type Vertex struct { X, Y float64 } func (v Vertex) Abs() float64 { return math.
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/mysql-install/" class="link black dim">
         Mysql Install
       </a>
@@ -141,23 +165,6 @@
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       有个同事问我，说为啥我用span标签写了一个序列，内容换行怎么围绕着这个span标签了？？ 我说，这正是css行内元素的特性啊！ 如果不想被“围绕”，可以使用block元素，通过float或者是flex等都可以实现。 css需要去感悟，理解，而不仅仅是死记硬背。
 如下： &lt;html&gt; &lt;body&gt; &lt;div id=&#39;div1&#39;&gt; &lt;span id=&#39;span1&#39;&gt;1&lt;/span&gt; &lt;span id=&#39;span2&#39;&gt;内容内容内容内容内容内容内容内容内容内容&lt;/span&gt; &lt;/div&gt; &lt;style type=&#39;text/css&#39;&gt; #div1{ width:100px; height:100px; background:red; } #span1{ background:black; color:#fff; padding:1px 5px; } #span2{ word-break:break-all; } &lt;/style&gt; &lt;/body&gt; &lt;/html&gt; 效果： 
-    </div>
-  </div>
-</div>
-
-        </div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white">
-          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/posts/new-operator/" class="link black dim">
-        javascript 中 调用new操作符时候发生了什么？
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       第一步，创建一个空对象 第二步，空对象的__proto__指向constractor的prototype 第三步，用该空对象为this调用constractor ES6中Reflect.constructor函数和test.js中createClass实现同样功能 function createClass(constructor,args){ var o = {}; o.__proto__ = constructor.prototype; constructor.call(o,...args); return o; } function Animal(type,cando){ this.type = type; this.cando = cando; } Animal.prototype.showType = function () { console.log(&#39;I am a &#39; + this.type + &#34;,and I can &#34; + this.cando); } var cat = createClass(Animal,[&#34;cat&#34;,&#34;捉老鼠&#34;]); cat.showType(); 
     </div>
   </div>
 </div>
